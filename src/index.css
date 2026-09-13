@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --color-void: #04050c;
+  --color-ink: #e8f4ff;
+  --color-dim: #6d7ea6;
+  --color-lime: #a6ff4d;
+  --color-cyan-neon: #38e8ff;
+  --color-amber-neon: #ffd23f;
+  --color-pink-neon: #ff3df2;
+  --color-red-neon: #ff4d6d;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+/* ---------- responsive menu / viewport ---------- */
+
+.menu-overlay {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.menu-content {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-height: 720px) {
+  .menu-content {
+    gap: 0.45rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .menu-content > .pop-in.w-full {
+    padding: 0.55rem 0.75rem;
+  }
+
+  .menu-content > div:last-child {
+    display: none;
+  }
+}
+
+.overlay-fade {
+  overflow-x: clip;
+  scrollbar-width: none;
+}
+
+.overlay-fade::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+body {
+  background: #04050c;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.title-glow {
+  text-shadow:
+    0 0 12px rgba(166, 255, 77, 0.55),
+    0 0 48px rgba(166, 255, 77, 0.28),
+    0 0 120px rgba(56, 232, 255, 0.2);
+}
+
+.stroke-title {
+  -webkit-text-stroke: 1.5px rgba(56, 232, 255, 0.6);
+  color: transparent;
+  text-shadow: 0 0 34px rgba(56, 232, 255, 0.25);
+}
+
+.score-glow {
+  text-shadow: 0 0 18px rgba(232, 244, 255, 0.35);
+}
+
+/* ---------- vignette + scanlines ---------- */
+.vignette {
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 42%, transparent 55%, rgba(2, 3, 10, 0.55) 100%);
+}
+
+.scanlines {
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.022) 0px,
+    rgba(255, 255, 255, 0.022) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* ---------- buttons ---------- */
+.btn-neon {
+  position: relative;
+  font-family: var(--font-display);
+  letter-spacing: 0.22em;
+  color: #04050c;
+  background: linear-gradient(135deg, #a6ff4d 0%, #4dffa3 60%, #38e8ff 130%);
+  box-shadow:
+    0 0 22px rgba(166, 255, 77, 0.45),
+    0 0 60px rgba(166, 255, 77, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.12s cubic-bezier(0.2, 0.9, 0.3, 1.6), box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-neon:hover {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.08);
+  box-shadow:
+    0 0 30px rgba(166, 255, 77, 0.65),
+    0 0 90px rgba(166, 255, 77, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.btn-neon:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.btn-ghost {
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  color: #9fb2d8;
+  border: 1px solid rgba(159, 178, 216, 0.28);
+  background: rgba(159, 178, 216, 0.06);
+  backdrop-filter: blur(6px);
+  transition: all 0.15s ease;
+}
+
+.btn-ghost:hover {
+  color: #e8f4ff;
+  border-color: rgba(56, 232, 255, 0.55);
+  box-shadow: 0 0 18px rgba(56, 232, 255, 0.2);
+}
+
+.btn-icon {
+  color: #9fb2d8;
+  border: 1px solid rgba(159, 178, 216, 0.22);
+  background: rgba(6, 8, 20, 0.55);
+  backdrop-filter: blur(8px);
+  transition: all 0.15s ease;
+}
+
+.btn-icon:hover {
+  color: #e8f4ff;
+  border-color: rgba(56, 232, 255, 0.5);
+  box-shadow: 0 0 16px rgba(56, 232, 255, 0.18);
+}
+
+/* ---------- overlays ---------- */
+.overlay-fade {
+  animation: overlayIn 0.32s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pop-in {
+  animation: popIn 0.5s cubic-bezier(0.2, 1.4, 0.3, 1) both;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.float-slow {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.pulse-ring {
+  animation: pulseRing 1.8s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(166, 255, 77, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(166, 255, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(166, 255, 77, 0);
+  }
+}
+
+.blink {
+  animation: blinkA 1.15s steps(2, start) infinite;
+}
+
+@keyframes blinkA {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* ---------- kbd ---------- */
+.kbd {
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: #aebadd;
+  border: 1px solid rgba(159, 178, 216, 0.3);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 7px;
+  background: rgba(159, 178, 216, 0.07);
+}
+
+/* ---------- range sliders ---------- */
+.neon-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 9999px;
+  background: #e8f4ff;
+  border: 2px solid #04050c;
+  box-shadow: 0 0 10px rgba(166, 255, 77, 0.7);
+  cursor: pointer;
+}
+
+.neon-range::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border-radius: 9999px;
+  background: #e8f4ff;
+  border: 2px solid #04050c;
+  box-shadow: 0 0 10px rgba(166, 255, 77, 0.7);
+  cursor: pointer;
+}
+
+/* ---------- touch d-pad ---------- */
+.dpad-btn {
+  color: rgba(232, 244, 255, 0.75);
+  border: 1px solid rgba(159, 178, 216, 0.24);
+  background: rgba(10, 14, 32, 0.5);
+  backdrop-filter: blur(8px);
+  transition: transform 0.09s ease, background 0.09s ease;
+}
+
+.dpad-btn:active {
+  transform: scale(0.9);
+  background: rgba(166, 255, 77, 0.22);
+  border-color: rgba(166, 255, 77, 0.6);
+  color: #04050c;
+}
+
+/* ---------- table rows ---------- */
+.score-row {
+  transition: background 0.15s ease;
+}
+
+.score-row:hover {
+  background: rgba(56, 232, 255, 0.05);
+}
