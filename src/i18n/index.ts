@@ -14,9 +14,9 @@ export type LangId = (typeof LANGS)[number]["id"];
 
 const en = {
   tagline: "A SNAKE REMIX",
-  pitch: "Every 8 bites the arena {reshapes}. Chain a {combo}, hunt the {gold}.",
-  pitchReshapes: "reshapes",
-  pitchCombo: "×6 combo",
+  pitch: "",
+  pitchReshapes: "",
+  pitchCombo: "",
   pitchGold: "golden orbs",
   play: "PLAY",
   orPressEnter: "OR PRESS {key}",
