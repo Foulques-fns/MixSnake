@@ -237,12 +237,16 @@ export function DuelPlay({
   /* ---------------- input ---------------- */
 
   const steer = useCallback((d: DirName) => {
-    const g = gameRef.current;
-    if (!g) return;
-    const vec = g.steer(d);
-    if (vec && !g.isHost) netRef.current?.send({ t: "i", d: vec });
-  }, []);
+  const g = gameRef.current;
+  if (!g) return;
 
+  const vec = g.steer(d);
+  if (!vec) return;
+
+  if (!g.isHost) {
+    netRef.current?.send({ t: "i", d: vec });
+  }
+}, []);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const k = e.key.toLowerCase();
