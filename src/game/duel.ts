@@ -323,15 +323,15 @@ export class DuelGame {
 
   /** Local player steers. Guests send the intent upstream. */
   steer(name: DirName): { x: number; y: number } | null {
-    const p = this.side === "a" ? this.A : this.B;
-    const d = DIRS[name];
-    const last = p.queue.length ? p.queue[p.queue.length - 1] : p.dir;
-    if ((d.x === -last.x && d.y === -last.y) || (d.x === last.x && d.y === last.y)) return null;
-    if (this.isHost) {
-      if (p.queue.length < 3) p.queue.push(d);
-    }
-    return d;
+  const p = this.side === "a" ? this.A : this.B;
+  const d = DIRS[name];
+  const last = p.queue.length ? p.queue[p.queue.length - 1] : p.dir;
+  if ((d.x === -last.x && d.y === -last.y) || (d.x === last.x && d.y === last.y)) return null;
+  if (this.isHost) {
+    if (p.queue.length < 3) p.queue.push(d);
   }
+  return d;
+}
 
   /** Host applies a remote input from the guest. */
   applyRemoteDir(d: { x: number; y: number }) {
