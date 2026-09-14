@@ -411,9 +411,10 @@ export default function App() {
       sy = t.clientY;
     };
     const onMove = (e: TouchEvent) => {
-      e.preventDefault();
-      if (screenRef.current !== "playing") return;
-      if (touchModeRef.current === "dpad") return;
+  if (screenRef.current !== "playing") return;
+  if (touchModeRef.current === "dpad") return;
+
+  e.preventDefault();
       const g = gameRef.current;
       if (!g) return;
       const t = e.touches[0];
