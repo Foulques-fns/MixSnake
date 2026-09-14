@@ -440,7 +440,7 @@ export default function App() {
   const bestScoreValue = scores[0]?.score ?? 0;
 
   return (
-    <div ref={wrapRef} className="relative h-full w-full overflow-hidden bg-[#04050c]" style={{ touchAction: "none" }}>
+   <div ref={wrapRef} className="relative h-full w-full overflow-hidden bg-[#04050c]">
       <canvas ref={canvasRef} className="absolute inset-0 block" style={{ visibility: screen === "duelPlay" ? "hidden" : "visible" }} />
       <div className="vignette pointer-events-none absolute inset-0 z-10" />
       {settings.scanlines && <div className="scanlines pointer-events-none absolute inset-0 z-10" />}
